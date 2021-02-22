@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HousingService } from 'src/app/services/houseing.service';
 import { ActivatedRoute } from '@angular/router';
-import { HouseingService } from 'src/app/services/houseing.service';
 import { IPropertyBase } from 'src/app/model/ipropertybase';
 
 @Component({
@@ -10,20 +10,26 @@ import { IPropertyBase } from 'src/app/model/ipropertybase';
 })
 export class PropertyListComponent implements OnInit {
   SellRent = 1;
-  properties: Array<IPropertyBase>;
+  properties: IPropertyBase[];
 
   constructor(
     private route: ActivatedRoute,
-    private houseingService: HouseingService
+    private housingService: HousingService
   ) {}
 
   ngOnInit(): void {
     if (this.route.snapshot.url.toString()) {
-      this.SellRent = 2; //Means we are on rent-property URL else we are on base URL
+      this.SellRent = 2; // Means we are on rent-property URL else we are on base URL
     }
-    this.houseingService.getAllproperties(this.SellRent).subscribe(
+    this.housingService.getAllProperties(this.SellRent).subscribe(
       (data) => {
         this.properties = data;
+        const newProperty = JSON.parse(localStorage.getItem('newProp'));
+
+        if (newProperty.SellRent === this.SellRent) {
+          this.properties = [newProperty, ...this.properties];
+        }
+
         console.log(data);
       },
       (error) => {
