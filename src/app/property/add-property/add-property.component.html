@@ -2,10 +2,10 @@
   <div class="col-8 shadow-lg p-0 bg-white">
     <div class="card">
       <div class="card-header">
-        <h3>List your Porperty</h3>
+        <h3>List your Property</h3>
       </div>
       <div class="card-body">
-        <form (ngSubmit)="onSubmit()" [formGroup]="addPropertyForm">
+        <form (ngSubmit)='onSubmit()' [formGroup]="addPropertyForm">
           <div class="tab-panel">
             <tabset class="member-tabset" #formTabs>
               <tab heading="Basic Info" formGroupName="BasicInfo">
@@ -26,14 +26,14 @@
                   <p>BHK</p>
                   <div class="btn-group" btnRadioGroup formControlName="BHK" [(ngModel)]="propertyView.BHK" name="BHK">
                     <label *ngFor="let bhk of [1,2,3,4]" class="btn btn-outline-primary mr-2" [btnRadio]="bhk"
-                      tabindex="0" role="button" name="BHK">{{bhk}}
+                      tabindex="0" role="button" name="BHK">
+                      {{bhk}}
                     </label>
                   </div>
                   <div class="error-block" *ngIf="BHK.invalid && nextClicked">
                     Please select BHK
                   </div>
                 </div>
-
 
                 <div class="form-group col-12">
                   <p>Property Type</p>
@@ -51,7 +51,8 @@
                   <p>Furnishing Type</p>
                   <div class="btn-group" btnRadioGroup formControlName="FType" [(ngModel)]="propertyView.FType">
                     <label *ngFor="let ftype of furnishTypes" class="btn btn-outline-primary mr-2" [btnRadio]="ftype"
-                      tabindex="0" role="button" name="FurnishType"> {{ftype}}
+                      tabindex="0" role="button" name="FurnishType">
+                      {{ftype}}
                     </label>
                   </div>
                   <div class="error-block" *ngIf="FType.invalid && nextClicked">
@@ -106,7 +107,6 @@
                   </div>
                 </div>
 
-
                 <div class="form-group col-12">
                   <label>Built Area (in Sqr Feet)</label>
                   <input type="text" class="form-control" [(ngModel)]="propertyView.BuiltArea"
@@ -124,6 +124,7 @@
                 <div class="form-group col-12">
                   <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(2, PriceInfo.valid)">Next</button>
+
                   <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(0, PriceInfo.valid)">Back</button>
                 </div>
@@ -157,10 +158,12 @@
                 <div class="form-group col-12">
                   <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(3, AddressInfo.valid)">Next</button>
+
                   <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(1, AddressInfo.valid)">Back</button>
                 </div>
               </tab>
+
               <tab heading="Other Details" formGroupName="OtherInfo">
                 <div class="form-group col-12">
                   <p>Ready to Move</p>
@@ -175,10 +178,11 @@
                   </div>
                 </div>
 
+
                 <div *ngIf="RTM.value==2" class="form-group col-6">
                   <label>Possession/Avaialble From</label>
-                  <input type="text" class="form-control" formControlName="PossessionOn" bsDatepicker
-                    [bsConfig]="{containerClass: 'theme-dark-blue', dateInputFormat: 'DD-MM-YYYY'}">
+                  <input type="text" class="form-control" formControlName="PossessionOn" bsDatepicker [bsConfig]="{containerClass: 'theme-dark-blue',
+                  dateInputFormat: 'DD-MM-YYYY'}">
                 </div>
 
                 <div *ngIf="RTM.value==1" class="form-group col-3">
@@ -217,6 +221,7 @@
                 <div class="form-group col-12">
                   <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(4, OtherInfo.valid)">Next</button>
+
                   <button type="button" class="btn btn-primary btn-block"
                     (click)="selectTab(2, OtherInfo.valid)">Back</button>
                 </div>

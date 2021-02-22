@@ -44,7 +44,7 @@ export class AddPropertyComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private houseingService: HousingService,
+    private housingService: HousingService,
     private alertify: AlertifyService
   ) {}
 
@@ -204,7 +204,7 @@ export class AddPropertyComponent implements OnInit {
     this.nextClicked = true;
     if (this.allTabsValid()) {
       this.mapProperty();
-      this.houseingService.addProperty(this.property);
+      this.housingService.addProperty(this.property);
       this.alertify.success(
         'Congrats, your property listed successfully on our website'
       );
@@ -223,6 +223,7 @@ export class AddPropertyComponent implements OnInit {
   }
 
   mapProperty(): void {
+    this.property.Id = this.housingService.newPropID();
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK = this.BHK.value;
     this.property.PType = this.PType.value;
